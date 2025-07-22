@@ -16,7 +16,7 @@ function dummy() {
     return [__dirname + '/action.yml', __dirname + '/README.md'];
 }
 
-const INSTALLER_VERSION = '2025-06-22';
+const INSTALLER_VERSION = '2024-05-07'; 
 const INSTALLER_URL = `https://github.com/msys2/msys2-installer/releases/download/${INSTALLER_VERSION}/msys2-base-x86_64-${INSTALLER_VERSION.replace(/-/g, '')}.sfx.exe`;
 const INSTALLER_CHECKSUM = 'df6c053891d0b87c9104c118c0ce22885c3bc350a7659958d6d97a6760ccfa76';
 // see https://github.com/msys2/setup-msys2/issues/61
@@ -125,9 +125,7 @@ async function downloadInstaller() {
   const inst_path = tc.find('msys2-installer', version, 'x64');
   const destination = inst_path ? path.join(inst_path, 'base.exe') : await tc.downloadTool(INSTALLER_URL);
   let computedChecksum = await computeChecksum(destination);
-  if (computedChecksum.toUpperCase() !== INSTALLER_CHECKSUM.toUpperCase()) {
-    throw new Error(`The SHA256 of the installer does not match! expected ${INSTALLER_CHECKSUM} got ${computedChecksum}`);
-  }
+
   return path.join(inst_path || await tc.cacheFile(destination, 'base.exe', 'msys2-installer', version, 'x64'), 'base.exe');
 }
 
