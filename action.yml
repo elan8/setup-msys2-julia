@@ -1,5 +1,5 @@
-name: 'Setup MSYS2'
-description: 'Setup an MSYS2 environment'
+name: 'Setup MSYS2 for Julia build'
+description: 'Setup an MSYS2 environment for Julia build'
 branding:
   color: purple
   icon: terminal
